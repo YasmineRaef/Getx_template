@@ -10,7 +10,7 @@ class NamedRoutes {
   static Map<String, Widget Function(BuildContext)> basicRoutes = {
     material: (context) => const App(),
     home: (context) => const MyHomePage(),
-    splash: (context) => const SplashScreen()
+    splash: (context) => const SplashScreen(),
   };
 }
 
@@ -19,4 +19,4 @@ extension MyNavigator on BuildContext {
     return Navigator.pushReplacement(
         context, MaterialPageRoute(builder: ((context) => page)));
   }
-}
+} // also, can be done by Get.to(specific page)

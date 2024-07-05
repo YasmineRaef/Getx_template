@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:getx_template/app/app_localizations.dart';
+import 'package:getx_template/data/get_storage.dart';
 import 'package:getx_template/presentation/resources/theme_manager.dart';
 
 IconData state = Icons.dark_mode;
@@ -25,6 +26,10 @@ class _DarkLightButtonState extends State<DarkLightButton> {
           setState(() {
             state =
                 (state == Icons.dark_mode ? Icons.light_mode : Icons.dark_mode);
+            box.write('state', state);
+            // box.listen(() {
+            //   print(box.read('state').toString());
+            // });
           });
           AppTheme.changeThemeMode();
         },

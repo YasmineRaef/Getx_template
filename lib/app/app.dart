@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:getx_template/app/app_localizations.dart';
 import 'package:getx_template/presentation/resources/theme_manager.dart';
@@ -15,21 +14,8 @@ class App extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       supportedLocales: const [Locale('en'), Locale('ar')],
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
-      ],
-      localeResolutionCallback: (deviceLocale, supportedLocales) {
-        for (var locale in supportedLocales) {
-          if (deviceLocale != null &&
-              deviceLocale.languageCode == locale.languageCode) {
-            return deviceLocale;
-          }
-        }
-        return supportedLocales.first;
-      },
+      localizationsDelegates: LocalizationDelegates,
+      localeResolutionCallback: localResolutionCallback,
       locale: myLocale,
       home: const SplashScreen(),
       theme: AppTheme.getLightTheme(),
@@ -37,8 +23,4 @@ class App extends StatelessWidget {
       themeMode: AppTheme.themeMode,
     );
   }
-}
-
-bool checkCurrentLocale() {
-  return myLocale == const Locale('en');
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:getx_template/app/app.dart';
 import 'package:getx_template/app/app_localizations.dart';
-import 'package:getx_template/presentation/resources/theme_manager.dart';
+import 'package:getx_template/data/get_storage.dart';
 
 class LanguageButton extends StatefulWidget {
   const LanguageButton({super.key});
@@ -25,7 +25,11 @@ class _LanguageButtonState extends State<LanguageButton> {
               } else {
                 myLocale = const Locale('en');
               }
-              AppTheme.changeLocal(myLocale);
+              changeLocal(myLocale);
+              box.write('local', myLocale);
+            //   box.listen(() {
+            //   print(box.read('local'));
+            // });
             });
           },
           icon: const Icon(Icons.language))

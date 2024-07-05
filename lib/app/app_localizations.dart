@@ -1,7 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:getx_template/app/app.dart';
 
 class AppLocalizations {
   final Locale? locale;
@@ -46,8 +49,31 @@ class _AppLocalizationsDelegate
       false;
 }
 
+Iterable<LocalizationsDelegate<dynamic>> LocalizationDelegates = const [
+  AppLocalizations.delegate,
+  GlobalMaterialLocalizations.delegate,
+  GlobalWidgetsLocalizations.delegate,
+  GlobalCupertinoLocalizations.delegate
+];
+
+Locale? localResolutionCallback(deviceLocale, supportedLocales) {
+  for (var locale in supportedLocales) {
+    if (deviceLocale != null &&
+        deviceLocale.languageCode == locale.languageCode) {
+      return deviceLocale;
+    }
+  }
+  return supportedLocales.first;
+}
+
 extension TranslateString on String {
   String translateS(BuildContext context) {
     return AppLocalizations.of(context)!.translate(this);
   }
 }
+
+bool checkCurrentLocale() {
+  return myLocale == const Locale('en');
+}
+
+ void changeLocal(Locale myLocale) => Get.updateLocale(myLocale);
